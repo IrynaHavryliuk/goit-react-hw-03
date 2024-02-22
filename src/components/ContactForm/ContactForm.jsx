@@ -46,7 +46,7 @@ function ContactForm({ onAddContact }) {
             <Field type="text" id="number" name="number" />
             <ErrorMessage name="number" component="div" />
           </div>
-          <button type="submit" disabled={isSubmitting}>Додати контакт</button>
+          <button type="submit" disabled={isSubmitting}>Add contact</button>
         </Form>
       )}
     </Formik>
