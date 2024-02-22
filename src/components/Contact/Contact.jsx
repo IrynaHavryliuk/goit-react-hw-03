@@ -6,7 +6,7 @@ function Contact({ id, name, number, onDeleteContact }) {
     return (
       <li>
         {name}: {number}
-        <button onClick={handleDelete}>Видалити</button>
+        <button onClick={handleDelete}>Delete</button>
       </li>
     );
   }

@@ -1,13 +1,23 @@
 import Contact from '../Contact/Contact';
 
-function ContactList({ contacts, onDeleteContact }) {
+const ContactList = ({ contacts, onDeleteContact, search }) => {
+  const filteredContacts = contacts.filter(contact => 
+    contact.name && contact.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <ul>
-      {contacts.map(contact => (
-        <Contact key={contact.id} {...contact} onDeleteContact={onDeleteContact} />
+      {filteredContacts.map(contact => (
+        <Contact
+          key={contact.id}
+          id={contact.id}
+          name={contact.name}
+          number={contact.number}
+          onDeleteContact={onDeleteContact}
+        />
       ))}
     </ul>
   );
-}
+};
 
 export default ContactList;

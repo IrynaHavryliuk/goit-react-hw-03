@@ -2,55 +2,52 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 
-function ContactForm({ onAddContact }) {
-  // Схема валідації для форми
-  const validationSchema = Yup.object().shape({
+const ContactForm = ({ onAddContact }) => {
+  const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'Ім\'я повинно містити щонайменше 3 символи')
-      .max(50, 'Ім\'я не повинно перевищувати 50 символів')
-      .required('Це поле обов\'язкове для заповнення'),
+      .required('Обов\'язкове поле')
+      .min(3, 'Мінімум 3 символи')
+      .max(50, 'Максимум 50 символів'),
     number: Yup.string()
-      .min(3, 'Номер повинен містити щонайменше 3 символи')
-      .max(50, 'Номер не повинен перевищувати 50 символів')
-      .required('Це поле обов\'язкове для заповнення'),
+      .required('Обов\'язкове поле')
+      .min(3, 'Мінімум 3 символи')
+      .max(50, 'Максимум 50 символів'),
   });
 
-  // Функція додавання контакту
   const handleSubmit = (values, { resetForm }) => {
     const newContact = {
       id: nanoid(),
       name: values.name,
-      number: values.number,
+      number: values.number
     };
-    // Додавання контакту до списку
     onAddContact(newContact);
-    // Очищення форми після додавання контакту
     resetForm();
   };
 
   return (
-    <Formik
-      initialValues={{ name: '', number: '' }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
+    <div>
+      <h2>Додати контакт</h2>
+      <Formik
+        initialValues={{ name: '', number: '' }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
         <Form>
           <div>
             <label htmlFor="name">Name:</label>
             <Field type="text" id="name" name="name" />
-            <ErrorMessage name="name" component="div" />
+            <ErrorMessage name="name" component="div" className="error" />
           </div>
           <div>
-            <label htmlFor="number">Number:</label>
+            <label htmlFor="number">Nomber:</label>
             <Field type="text" id="number" name="number" />
-            <ErrorMessage name="number" component="div" />
+            <ErrorMessage name="number" component="div" className="error" />
           </div>
-          <button type="submit" disabled={isSubmitting}>Add contact</button>
+          <button type="submit">Add contact</button>
         </Form>
-      )}
-    </Formik>
+      </Formik>
+    </div>
   );
-}
+};
 
 export default ContactForm;
