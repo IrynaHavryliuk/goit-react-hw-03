@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import ContactForm from './components/ContactForm/ContactForm';
+import SearchBox from './components/SearchBox/SearchBox';
+import ContactList from './components/ContactList/ContactList';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Стан для зберігання списку контактів
+  const [contacts, setContacts] = useState([]);
+
+  // Ефект для завантаження контактів з локального сховища при завантаженні сторінки
+  useEffect(() => {
+    const storedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (storedContacts) {
+      setContacts(storedContacts);
+    }
+  }, []);
+
+  // Ефект для збереження контактів у локальне сховище при зміні стану
+  useEffect(() => {
+    localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
+
+  // Функція додавання контакту
+  const addContact = (contact) => {
+    setContacts([...contacts, contact]);
+  };
+
+  // Функція видалення контакту
+  const handleDeleteContact = (id) => {
+    setContacts(contacts.filter(contact => contact.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm onAddContact={addContact} />
+      <SearchBox />
+      <ContactList contacts={contacts} onDeleteContact={handleDeleteContact} />
+    </div>
+  );
 }
 
-export default App
+export default App;
