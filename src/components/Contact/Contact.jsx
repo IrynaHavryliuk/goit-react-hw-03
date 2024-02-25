@@ -1,14 +1,10 @@
-function Contact({ id, name, number, onDeleteContact }) {
-    const handleDelete = () => {
-      onDeleteContact(id);
-    };
-  
-    return (
-      <li>
-        {name}: {number}
-        <button onClick={handleDelete}>Delete</button>
-      </li>
-    );
-  }
-  
-  export default Contact;
+const Contact = ({ id, name, number }) => {
+  return (
+    <li>
+      <p>Name: {name}</p>
+      <p>Number: {number}</p>
+    </li>
+  );
+};
+
+export default Contact;
