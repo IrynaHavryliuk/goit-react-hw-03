@@ -1,25 +1,21 @@
-import { useState, useEffect } from 'react';
 import Contact from '../Contact/Contact';
-import contactsData from '../Contact/Contact.json'; // Імпортуємо дані контактів з файлу JSON
 
-const ContactList = () => {
-  const [contacts, setContacts] = useState([]);
-
-  useEffect(() => {
-    // Після завантаження компонента, завантажуємо дані контактів з файлу JSON
-    setContacts(contactsData);
-  }, []); // Передаємо пустий масив залежностей, щоб ефект запустився тільки раз
+const ContactList = ({ contacts, searchTerm, onDeleteContact }) => {
+  // Filter contacts based on the search term
+  const filteredContacts = contacts.filter(contact =>
+    contact.name && typeof contact.name === 'string' && contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
-      <h1>Contacts</h1>
       <ul>
-        {contacts.map(contact => (
+        {filteredContacts.map(contact => (
           <Contact
             key={contact.id}
             id={contact.id}
             name={contact.name}
             number={contact.number}
+            onDelete={onDeleteContact}
           />
         ))}
       </ul>

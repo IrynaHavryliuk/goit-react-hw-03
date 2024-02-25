@@ -5,13 +5,13 @@ import { nanoid } from 'nanoid';
 const ContactForm = ({ onAddContact }) => {
   const validationSchema = Yup.object({
     name: Yup.string()
-      .required('Обов\'язкове поле')
-      .min(3, 'Мінімум 3 символи')
-      .max(50, 'Максимум 50 символів'),
+      .required('Name is required')
+      .min(3, 'Name must be at least 3 characters')
+      .max(50, 'Name must not exceed 50 characters'),
     number: Yup.string()
-      .required('Обов\'язкове поле')
-      .min(3, 'Мінімум 3 символи')
-      .max(50, 'Максимум 50 символів'),
+      .required('Number is required')
+      .min(3, 'Number must be at least 3 characters')
+      .max(50, 'Number must not exceed 50 characters'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
@@ -26,7 +26,7 @@ const ContactForm = ({ onAddContact }) => {
 
   return (
     <div>
-      <h2>Додати контакт</h2>
+      <h2>Add New Contact</h2>
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={validationSchema}
@@ -34,16 +34,16 @@ const ContactForm = ({ onAddContact }) => {
       >
         <Form>
           <div>
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">Name</label>
             <Field type="text" id="name" name="name" />
             <ErrorMessage name="name" component="div" className="error" />
           </div>
           <div>
-            <label htmlFor="number">Nomber:</label>
+            <label htmlFor="number">Number</label>
             <Field type="text" id="number" name="number" />
             <ErrorMessage name="number" component="div" className="error" />
           </div>
-          <button type="submit">Add contact</button>
+          <button type="submit">Add Contact</button>
         </Form>
       </Formik>
     </div>
