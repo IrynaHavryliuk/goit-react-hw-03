@@ -1,13 +1,17 @@
-.searchBox {
-    margin-bottom: 20px;
-  }
-  
-  .input {
-    width: 100%;
+.searchContainer {
+  width: 353px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.input {
+    width: 340px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
   }
+  
+  
   

@@ -2,7 +2,7 @@ import styles from './SearchBox.module.css';
 
 function SearchBox({ value, onChange }) {
   return (
-    <div className={styles.searchBox}>
+    <div className={styles.searchContainer}>
       <h2>Finde contacts by name</h2>
       <input
         type="text"
