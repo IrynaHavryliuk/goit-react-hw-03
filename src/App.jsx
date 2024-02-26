@@ -11,12 +11,17 @@ function App() {
 
   // Save contacts to local storage whenever they are updated
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+    const storedContacts = localStorage.getItem('contacts');
+    if (storedContacts) {
+      setContacts(JSON.parse(storedContacts));
+    }
+  }, []);
 
   const addContact = (newContact) => {
     setContacts((prevContacts) => {
-      return [...prevContacts, newContact];
+      const updatedContacts = [...prevContacts, newContact];
+      localStorage.setItem('contacts', JSON.stringify(updatedContacts)); // Зберегти оновлений список контактів у локальне сховище
+      return updatedContacts;
     });
   };
 

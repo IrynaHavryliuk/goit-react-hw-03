@@ -6,11 +6,11 @@ import style from "./ContactForm.module.css";
 const ContactForm = ({ onAddContact }) => {
   const validationSchema = Yup.object({
     name: Yup.string()
-      .required('Name is required')
+      .required('Required')
       .min(3, 'Name must be at least 3 characters')
       .max(50, 'Name must not exceed 50 characters'),
     number: Yup.string()
-      .required('Number is required')
+      .required('Required')
       .min(3, 'Number must be at least 3 characters')
       .max(50, 'Number must not exceed 50 characters'),
   });
