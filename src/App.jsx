@@ -5,11 +5,11 @@ import ContactList from './components/ContactList/ContactList';
 import contactsData from './components/Contact/Contact.json';
 
 function App() {
-  // Load contacts from local storage on component mount
+
   const [contacts, setContacts] = useState(contactsData);
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Save contacts to local storage whenever they are updated
+  
   useEffect(() => {
     const storedContacts = localStorage.getItem('contacts');
     if (storedContacts) {
@@ -20,7 +20,7 @@ function App() {
   const addContact = (newContact) => {
     setContacts((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact];
-      localStorage.setItem('contacts', JSON.stringify(updatedContacts)); // Зберегти оновлений список контактів у локальне сховище
+      localStorage.setItem('contacts', JSON.stringify(updatedContacts)); 
       return updatedContacts;
     });
   };
