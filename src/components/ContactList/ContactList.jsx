@@ -1,15 +1,10 @@
 import Contact from '../Contact/Contact';
 
-const ContactList = ({ contacts, searchTerm, onDeleteContact }) => {
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name && typeof contact.name === 'string' && contact.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <div>
       <ul>
-        {filteredContacts.map(contact => (
+        {contacts.map(contact => (
           <Contact
             key={contact.id}
             id={contact.id}

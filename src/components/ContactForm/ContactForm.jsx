@@ -27,7 +27,6 @@ const ContactForm = ({ onAddContact }) => {
 
   return (
     <div>
-      
       <Formik
         initialValues={{ name: '', number: '' }}
         validationSchema={validationSchema}
@@ -37,12 +36,12 @@ const ContactForm = ({ onAddContact }) => {
           <div>
             <label className={style.label} htmlFor="name">Name</label>
             <Field className={style.input} type="text" id="name" name="name" />
-            <ErrorMessage name="name" component="div" className="error" />
+            <ErrorMessage className={style.errorMessage} name="name" component="div" />
           </div>
           <div>
             <label className={style.label} htmlFor="number">Number</label>
             <Field className={style.input} type="text" id="number" name="number" />
-            <ErrorMessage name="number" component="div" className="error" />
+            <ErrorMessage className={style.errorMessage} name="number" component="div" />
           </div>
           <button className={style.button} type="submit">Add Contact</button>
         </Form>
